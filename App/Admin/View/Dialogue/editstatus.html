@@ -1,0 +1,43 @@
+
+<div class="pageContent">
+	<form method="post" action="__URL__/updatestatus/navTabId/listdialogue/callbackType/closeCurrent"  class="pageForm required-validate" 
+		onsubmit="return validateCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<div class="pageFormContent" layoutH="60" style="padding-right:100px;">
+			<input type="hidden"  name="id" value="{$vo.id}"/>
+				<dl class="nowrap">
+					<dt>英文台词：</dt>
+					<dd><textarea name="en_dialogue" cols="80" rows="2" disabled >{$vo.en_dialogue}</textarea></dd>
+				</dl>
+				<dl class="nowrap">
+					<dt>中文台词：</dt>
+					<dd><textarea name="cn_dialogue" class="required" cols="80" rows="2" disabled>{$vo.cn_dialogue}</textarea></dd>
+				</dl>
+				<dl>
+					<dt>来源影片：</dt>
+					<dd><input name="source" type="text" value="{$vo.source}" style="width:100%" disabled /></dd>
+				</dl>
+				<dl>
+					<dt>添加时间：</dt>
+					<dd>{$vo.addtime|date_format:"%Y-%m-%d %H:%M:%S"}</dd>
+				</dl>
+				
+				<dl >
+					<dt>状态：</dt>
+					<dd><select name="status"  style="width:100px;">
+						<option value="0" {if $vo.status=="0"}selected{/if}>新添加</option>
+						<option value="1" {if $vo.status=="1"}selected{/if}>显示</option>
+						<option value="2" {if $vo.status=="2"}selected{/if}>隐藏</option>
+					</select></dd>
+				</dl>
+			
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

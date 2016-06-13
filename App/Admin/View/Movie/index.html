@@ -1,0 +1,162 @@
+<form id="pagerForm" action="__URL__/index" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage|default:'1'}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" />
+	<input type="hidden" name="_order" value="{$smarty.request._order}"/>
+	<input type="hidden" name="_sort" value="{$smarty.request._sort}"/>
+</form>
+
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="" method="post">
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						<label>搜索电影：</label>
+						<input type="text" name="keyword" value="{$smarty.request.keyword}" /> [关键字：影片名，影片别名]
+					</td>
+					<td>
+						<select class="combox" name="status">
+							<option value="">--影片状态--</option>
+							<option value="0">新添加</option>
+							<option value="1">显示</option>
+							<option value="2">幻灯片</option>
+						</select>
+					</td>
+					<td>
+						<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+					</td>	
+				</tr>
+			</table>
+		</div>
+	</form>	
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="navTab" rel="user_msg" title="添加影片"><span>添加影片</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="delete" href="__URL__/delete/id/{ldelim}item_id{rdelim}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/edit/id/{ldelim}item_id{rdelim}" target="navTab"><span>修改</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/setmtype/id/{ldelim}item_id{rdelim}" target="dialog"><span>设置分类</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/edittype/id/{ldelim}item_id{rdelim}" target="dialog"><span>修改分类</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/uploads/id/{ldelim}item_id{rdelim}" target="dialog"><span>上传剧照</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/editUploads/id/{ldelim}item_id{rdelim}" target="dialog"><span>修改剧照</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/setActors/id/{ldelim}item_id{rdelim}" target="dialog"><span>设置演员信息</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/editactors/id/{ldelim}item_id{rdelim}" target="dialog"><span>修改演员信息</span></a></li>
+
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/editstatus/id/{ldelim}item_id{rdelim}" target="dialog"><span>修改状态</span></a></li>
+
+			<li class="line">line</li>
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+
+			<!--<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>-->
+		</ul>
+	</div>
+
+	<div id="w_list_print">
+	<table class="list" width="100%" targetType="navTab" asc="asc" desc="desc" layoutH="116">
+		<thead>
+			<tr>
+				<th  orderField="id" {if $smarty.request._order=='id'} class="{$smarty.request._sort}"{/if}>ID</th>
+				<th>影片封面</th>
+				<th  orderField="filmname" {if $smarty.request._order=='filmname'} class="{$smarty.request._sort}"{/if}>影片名</th>
+				<th>影片别名</th>
+				
+				<th>导演</th>
+				<th>编剧</th>
+				<th  orderField="nation" {if $smarty.request._order=='nation'} class="{$smarty.request._sort}"{/if}>制片国家/地区</th>
+				<th>语言</th>
+				
+				<th  orderField="showtime" {if $smarty.request._order=='showtime'} class="{$smarty.request._sort}"{/if}>上映时间</th>
+				<th  orderField="addtime" {if $smarty.request._order=='addtime'} class="{$smarty.request._sort}"{/if}>添加时间</th>
+				<th  orderField="minutes" {if $smarty.request._order=='minutes'} class="{$smarty.request._sort}"{/if}>片长</th>
+				<th>影片简介</th>
+				
+				<th  orderField="status" {if $smarty.request._order=='status'} class="{$smarty.request._sort}"{/if}>状态</th>
+				<!--<th width="80" orderField="name" class="asc">客户号</th>
+				<th width="100" orderField="num" class="desc">客户名称</th>-->
+				<th>设置演员信息</th>
+				<th>上传剧照</th>
+				<th>影片分类</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $list as $vo}
+			<tr target="item_id" rel="{$vo.id}">
+				<td>{$vo.id}</td>
+				<td>
+					<img src="__ROOT__/__UPLOAD__/Movie/Cover/a_{$vo.picname}" />
+				</td>
+				<td>{$vo.filmname}</td>
+				<td>{$vo.petname}</td>
+				
+				<td>{$vo.director}</td>
+				<td>{$vo.editor}</td>
+				<td>{$vo.nation}</td>
+				<td>{$vo.language}</td>
+				
+				<td>{$vo.showtime|date_format:'%Y-%m-%d'}</td>
+				<td>{$vo.addtime|date_format:'%Y-%m-%d %H:%M:%S'}</td>
+				<td>{$vo.minutes}</td>
+				<td><a style="color:blue" href="__URL__/content/id/{$vo.id}" target="dialog" width="600" height="480"  rel="listmovie" title="查看简介">
+				查看简介</a>
+				</td>
+				
+				<td>
+					{if $vo.status==0}新添加
+					{elseif $vo.status==1}显示
+					{elseif $vo.status==2}幻灯片
+					{/if}
+				</td>
+				<td>
+					<a style="color:blue" target="dialog" rel="setActors" href="__URL__/showActors/id/{$vo.id}">查看演员信息</a>		
+				</td>
+				<td>	
+					<a style="color:blue" target="dialog" rel="showPhotos" href="__URL__/showPhotos/id/{$vo.id}">查看剧照信息</a>			
+				</td>
+				<td>   
+					<a style="color:blue" target="dialog" rel="showMType" href="__URL__/showType/id/{$vo.id}">查看分类信息</a>
+				</td>
+				<!--<td><a href='__URL__/access/id/{$vo.id}'>配置权限</a></td>-->
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	</div>
+	
+	<div class="panelBar" >
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({ldelim}numPerPage:this.value{rdelim})">
+				<option value="10" {if $numPerPage==10}selected{/if}>10</option>
+				<option value="15" {if $numPerPage==15}selected{/if}>15</option>
+				<option value="20" {if $numPerPage==20}selected{/if}>20</option>
+				<option value="25" {if $numPerPage==25}selected{/if}>25</option>
+				<option value="30" {if $numPerPage==30}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+
+	</div>
+
+</div>

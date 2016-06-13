@@ -1,0 +1,36 @@
+
+<div class="pageContent">
+	<form method="post" action="__URL__/addRoleHandle/navTabId/listrole/callbackType/closeCurrent"  class="pageForm required-validate" 
+		onsubmit="return validateCallback(this,dialogAjaxDone);">
+		<div class="pageFormContent" layoutH="60">
+			<div id="wrap">
+			{foreach $node as $app}
+			<div class='app'>
+				<p>
+					<span>{$app['title']}</span>
+				</p>
+				{foreach $app.child as $action}
+				<dl>
+					<dt>
+						<span>{$action.title}</span>
+					</dt>
+					{foreach $action.child as $method}
+						<dd>
+							<span>{$method.title}</span>
+						</dd>				
+					{/foreach}
+				</dl>
+				{/foreach}	
+			</div>	
+			{/foreach}
+			</div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

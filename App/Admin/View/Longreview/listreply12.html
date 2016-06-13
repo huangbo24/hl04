@@ -1,0 +1,39 @@
+{include file="Public/pagerForm.html"}
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+		
+	</form>
+</div>
+<div class="pageContent">
+
+	<table class="table" width="100%" layoutH="72">
+		<thead>
+			<tr>
+				<th width="20" orderField="id" {if $smarty.request._order=='id'} class="{$smarty.request._sort}"{/if}>ID</th>
+				<th width="100">回复内容</th>
+				<th width="30" orderField="rtime" {if $smarty.request._order=='rtime'} class="{$smarty.request._sort}"{/if}>回复时间</th>				
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $list as $v}
+			<tr target="item_id" rel="{$v.id}">
+				<td>{$v.id}</td>
+				<td>{$v.content}</td>
+				<td>{$v.rtime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">确定</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+</div>

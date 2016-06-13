@@ -1,0 +1,78 @@
+<form id="pagerForm" action="__URL__/index2" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage|default:'1'}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" />
+	<input type="hidden" name="_order" value="{$smarty.request._order}"/>
+	<input type="hidden" name="_sort" value="{$smarty.request._sort}"/>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					<b>搜索</b> <!--&nbsp; 关键字：<input type="text" name="keyword" value="{$smarty.request.keyword}" /> 标题-->
+				</td>
+				<td>&nbsp; 状态：
+					<select name="state" >
+						<option value="" >-选择-</option>
+						<option value="1" {if $smarty.request.state==1}selected{/if}>正常</option>
+						<option value="2" {if $smarty.request.state==2}selected{/if}>禁止</option>
+					</select>
+				</td>
+				
+				<td>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<!--<li><a class="delete" href="__URL__/delete/id/{ldelim}item_id{rdelim}/navTabId/pcommentlist" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>-->
+			<li><a class="edit" href="__URL__/pedit/id/{ldelim}item_id{rdelim}"  width="400" height="240" target="dialog"><span>修改状态</span></a></li>
+			<li class="line">line</li>
+			<!--<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>-->
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr>
+				<th width="40">ID</th>
+				<th width="40">新闻标题</th>
+				<th width="40">发表用户</th>
+				<th width="40">内容</th>
+				<th width="40">评论时间</th>				
+				<th width="40">评论状态</th>	
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $list as $v}
+			<tr target="item_id" rel="{$v.id}">
+				<td>{$v.id}</td>
+				<td>{$v.title}</td>
+				<td>{$v.username}</td>
+				<td><a style="color:blue;"href="__URL__/pcontent/id/{$v.id}" target="dialog">查看内容</a></td>
+				<td>{$v.addtime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+				{if $v.state==1}<td>正常</td>{else $v.state==2}<td>禁止{/if}
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({ldelim}numPerPage:this.value{rdelim})">
+				<option value="10" {if $numPerPage==10}selected{/if}>10</option>
+				<option value="15" {if $numPerPage==15}selected{/if}>15</option>
+				<option value="20" {if $numPerPage==20}selected{/if}>20</option>
+				<option value="25" {if $numPerPage==25}selected{/if}>25</option>
+				<option value="30" {if $numPerPage==30}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+	</div>
+</div>
