@@ -18,7 +18,7 @@ return array(
 		'DB_PREFIX'   => 'mm_',       // 数据库表前缀
 
 		//使用的模板引擎名
-		'TMPL_ENGINE_TYPE'     => 'Smarty',
+		'TMPL_ENGINE_TYPE'     => 'smarty',
 		
 		// 默认false 表示URL区分大小写 true则表示不区分大小写
 		'URL_CASE_INSENSITIVE'  => false,
