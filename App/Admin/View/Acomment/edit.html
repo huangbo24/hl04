@@ -1,0 +1,36 @@
+
+<div class="pageContent">
+	<form method="post" action="__URL__/update/navTabId/listsreview/callbackType/closeCurrent"  class="pageForm required-validate" 
+		onsubmit="return validateCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<div class="pageFormContent" layoutH="60">
+			<input type="hidden" name="id" value="{$vo.id}" />
+				<dl class="nowrap">
+					<dt style="width:80px;">回复ID：</dt>
+					<dd style="width:50px;">{$vo.id}</dd>
+				</dl>
+				<dl class="nowrap">
+					<dt style="width:80px;">回复内容：</dt>
+					<dd><textarea  cols="90" rows="5" disabled>{$vo.content}</textarea></dd>
+				</dl>
+				<dl class="nowrap">
+					<dt style="width:80px;">回复状态：</dt>
+					<dd>
+						<select name="status">
+							<option value="1" {if $vo.status==1}selected{/if}>正常</option>
+							<option value="2" {if $vo.status==2}selected{/if}>举报</option>
+							<option value="3" {if $vo.status==3}selected{/if}>禁言</option>
+						</select>
+					</dd>
+				</dl>
+					
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

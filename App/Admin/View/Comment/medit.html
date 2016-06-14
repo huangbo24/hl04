@@ -1,0 +1,25 @@
+
+<div class="pageContent">
+	<form method="post" action="__URL__/mupdate/navTabId/mcommentlist/callbackType/closeCurrent"  class="pageForm required-validate" 
+		onsubmit="return validateCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<div class="pageFormContent" layoutH="60">
+			<input type="hidden" name="id" value="{$vo.id}" />
+				<dl>
+					<dt>状态:</dt>
+					<dd>
+						<input type="radio" name="state" value="1" {if $vo.state==1}checked{/if} />正常
+						<input type="radio" name="state" value="2" {if $vo.state==2}checked{/if} />禁止
+					</dd>
+				</dl>
+					
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

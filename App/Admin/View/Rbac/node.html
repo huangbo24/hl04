@@ -1,0 +1,105 @@
+<form id="pagerForm" action="__URL__/node" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage|default:'1'}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" />
+	<input type="hidden" name="_order" value="{$smarty.request._order}"/>
+	<input type="hidden" name="_sort" value="{$smarty.request._sort}"/>
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						<label>搜索节点：</label>
+						<input type="text" name="keywords" value="{$smarty.post.keyword}"/>
+					</td>
+				
+					<td>
+						<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+					</td>	
+				</tr>
+			</table>
+		</div>
+	</form>	
+</div>
+
+<div class="pageContent">
+	
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/addNode" target="dialog" width="480" height="270" rel="user_msg" title="添加应用"><span>添加应用</span></a></li>
+			<li class="line">line</li>
+
+			<li><a class="add" href="__URL__/nodeList" target="dialog" rel="user_msg" title="节点列表"><span>节点列表</span></a></li>
+			<li class="line">line</li>	
+
+			<li><a class="delete" href="__URL__/deleteNode/id/{ldelim}item_id{rdelim}/navTabId/listnode" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>			
+			<li class="line">line</li>	
+
+			<li><a class="edit" href="__URL__/editNode/id/{ldelim}item_id{rdelim}"  width="480" height="270" target="dialog"><span>修改</span></a></li>
+			<li class="line">line</li>
+
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+
+			<!-- <li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li> -->
+		</ul>
+	</div>
+
+	<div id="w_list_print">
+	<table class="table" width="100%" targetType="navTab" asc="asc" desc="desc" layoutH="116">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>节点</th>
+				<th>节点名称</th>
+				<th>节点描述</th>
+				<th>开启状态</th>
+				<th>操作</th>
+				<!-- <th width="80" orderField="name" class="asc">客户号</th>
+				<th width="100" orderField="num" class="desc">客户名称</th> -->
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $nodelist as $vo}
+			<tr target="item_id" rel="{$vo.id}">
+				<td>{$vo.id}</td>
+				<td>{$vo.name}</td>
+				<td>{$vo.title}</td>
+				<td>{$vo.remark}</td>
+				<td>{if $vo['status']}开启{else}禁用{/if}
+				</td>
+				<td>{if $vo.level eq 1}
+					<a style="color:blue" target="dialog" href="__URL__/addNode/pid/{$vo.id}/level/2">添加控制器</a>
+					{elseif $vo.level eq 2}
+					<a style="color:blue" target="dialog" href="__URL__/addNode/pid/{$vo.id}/level/3">添加方法</a>
+					{elseif $vo.level eq 3}
+						方法： {$vo.remark}
+					{/if}
+				<!-- <a style="color:blue" target="dialog" href="__URL__/addNode/pid/{$vo.id}/level/2">{$vo.level}添加控制器</a> -->
+				</td>
+				
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	</div>
+	
+	<div class="panelBar" >
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({ldelim}numPerPage:this.value{rdelim})">
+				<option value="10" {if $numPerPage==10}selected{/if}>10</option>
+				<option value="15" {if $numPerPage==15}selected{/if}>15</option>
+				<option value="20" {if $numPerPage==20}selected{/if}>20</option>
+				<option value="25" {if $numPerPage==25}selected{/if}>25</option>
+				<option value="50" {if $numPerPage==50}selected{/if}>50</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+
+	</div>
+	
+</div>

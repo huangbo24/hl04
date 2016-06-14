@@ -1,0 +1,102 @@
+{include file="Public/pagerForm.html"}
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					<b>搜索</b> &nbsp; 关键字：<input type="text" name="keyword" value="{$smarty.request.keyword}" /> [标题,内容]
+				</td>	
+				<td>&nbsp; 状态：
+					<select name="status" >
+						<option value="" >-选择-</option>
+						<option value="1" {if $smarty.request.status==1}selected{/if}>正常</option>
+						<option value="2" {if $smarty.request.status==2}selected{/if}>举报</option>
+						<option value="3" {if $smarty.request.status==3}selected{/if}>禁言</option>
+					</select>
+				</td>
+				<td>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="__URL__/delete/id/{ldelim}item_id{rdelim}/navTabId/listlreview" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{ldelim}item_id{rdelim}"  width="830" height="350" target="dialog"><span>修改状态</span></a></li>
+			<li class="line">line</li>
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+			<!--<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>-->
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr>
+				<th width="30" orderField="id" {if $smarty.request._order=='id'} class="{$smarty.request._sort}"{/if}>ID</th>
+				<th width="80">标题</th>
+				<!-- <th width="40">评论内容</th> -->
+				<th width="50">影片</th>
+				<th width="20">作者</th>
+				<th width="20" orderField="vnum" {if $smarty.request._order=='vnum'} class="{$smarty.request._sort}"{/if}>浏览数</th>
+				<th width="20" orderField="rnum" {if $smarty.request._order=='rnum'} class="{$smarty.request._sort}"{/if}>回复数</th>
+				<th width="20" style="color:red;">举报数</th>
+				<!-- <th width="80" orderField="unum" {if $smarty.request._order=='unum'} class="{$smarty.request._sort}"{/if}>有用数</th> -->
+				<th width="40" orderField="ptime" {if $smarty.request._order=='ptime'} class="{$smarty.request._sort}"{/if}>评论时间</th>					
+				<th width="30" orderField="status" {if $smarty.request._order=='status'} class="{$smarty.request._sort}"{/if}  >评论状态</th>
+				<th width="30"  >操作1</th>
+				<th width="40"  >操作2</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $list as $v}
+			<tr target="item_id" rel="{$v.id}">
+				<td>{$v.id}</td>
+				<td>{$v.title}</td>
+				<!-- <td>{$v.content}</td> -->
+				<td>{$v.filmname}</td>
+				<td>{$v.username}</td>
+				<td>{$v.vnum}</td>
+				<td>{$v.rnum}</td>
+				
+				{if empty($v.report)}
+				<td style="color:#666;">0</td>
+				{else}
+				<td style="color:red;">{$v.report}</td>
+				{/if}
+			
+				<!-- <td>{$v.unum}</td> -->
+				<td>{$v.ptime|date_format:"%Y-%m-%d   %H:%M:%S"}</td>
+				
+				{if $v.status eq "正常"}
+				<td style="color:blue;">{$v.status}</td>
+				{else if $v.status eq "举报"}
+				<td style="color:red;">{$v.status}</td>
+				{else}
+				<td style="color:#666;">{$v.status}</td>
+				{/if}	
+				
+				<td ><a href="__URL__/content/id/{$v.id}" target="dialog" style="color:green;" width="700" height="500" >查看内容</a></td>	
+				<td ><a href="__URL__/listreply/id/{$v.id}/navTabId/listreply" target="dialog" style="color:blue;" width="700" height="500">查看回复列表</a></td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({ldelim}numPerPage:this.value{rdelim})">
+				<option value="10" {if $numPerPage==10}selected{/if}>10</option>
+				<option value="15" {if $numPerPage==15}selected{/if}>15</option>
+				<option value="20" {if $numPerPage==20}selected{/if}>20</option>
+				<option value="25" {if $numPerPage==25}selected{/if}>25</option>
+				<option value="30" {if $numPerPage==30}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+	</div>
+</div>

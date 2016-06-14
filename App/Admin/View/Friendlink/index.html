@@ -1,0 +1,97 @@
+<form id="pagerForm" action="__URL__/index" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage|default:'1'}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" />
+	<input type="hidden" name="_order" value="{$smarty.request._order}"/>
+	<input type="hidden" name="_sort" value="{$smarty.request._sort}"/>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="" method="post">
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						<label>搜索名称：</label>
+						<input type="text" name="keyword" value="{$smarty.request.keyword}"/>
+					</td>
+					<td>&nbsp; 状态：
+						<select name="state" >
+							<option value="" >-选择-</option>
+							<option value="1" {if $smarty.request.state==1}selected{/if}>新添加</option>
+							<option value="2" {if $smarty.request.state==2}selected{/if}>前台显示</option>
+							<option value="3" {if $smarty.request.state==3}selected{/if}>已下架</option>
+						</select>
+					</td>
+					<td>
+						<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+					</td>	
+				</tr>
+			</table>
+		</div>
+	</form>	
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" rel="user_msg" title="添加幻灯片"><span>添加</span></a></li>
+			
+			<li class="line">line</li>			
+			<li><a class="delete" href="__URL__/del/id/{ldelim}item_id{rdelim}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			
+			<li class="line">line</li>			
+			<li><a class="edit" href="__URL__/edit/id/{ldelim}item_id{rdelim}" target="dialog"><span>修改</span></a></li>
+
+			<li class="line">line</li>
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+
+			<!--<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>-->
+		</ul>
+	</div>
+
+	<div id="w_list_print">
+	<table class="list" width="100%" targetType="navTab" asc="asc" desc="desc" layoutH="90">
+		<thead>
+			<tr>
+				<th width="40">ID</th>
+				<th width="150">链接名称</th>
+				<th width="150">链接地址</th>
+				<th width="150">网站LOGO</th>
+				<th width="150" orderField="dtime" {if $smarty.request._order=='dtime'}class="{$smarty.request._sort}"{/if}>添加时间</th>
+				<th width="150">显示状态</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $list as $vo}
+				<tr target="item_id" rel="{$vo.id}">
+					<td>{$vo.id}</td>
+					<td>{$vo.linkname}</td>
+					<td>{$vo.url}</td>
+					<td>
+						<img src="__ROOT__/Uploads/News/mypic/c_{$vo.picname}"/>
+					</td>
+					<td>{$vo.dtime|date_format:"%Y-%m-%d"}</td>
+					{if $vo.state==1}<td>新添加</td>{elseif $vo.state==2}<td>前台显示</td>{else}<td>已下架</td>{/if}
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	</div>
+	
+	<div class="panelBar" >
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({ldelim}numPerPage:this.value{rdelim})">
+				<option value="10" {if $numPerPage==10}selected{/if}>10</option>
+				<option value="15" {if $numPerPage==15}selected{/if}>15</option>
+				<option value="20" {if $numPerPage==20}selected{/if}>20</option>
+				<option value="25" {if $numPerPage==25}selected{/if}>25</option>
+				<option value="30" {if $numPerPage==30}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+
+	</div>
+
+</div>

@@ -1,0 +1,26 @@
+<div class="pageContent" layoutY="120">	
+	<div id="wrap">
+		{foreach $nlist as $app}
+		<div class='app'>
+			<p>
+				<span>{$app['title']}</span>
+				[<a style="color:blue" target="dialog" href="__URL__/addNode2/pid/{$app['id']}/level/2}">添加控制器</a>]
+			</p>
+			{foreach $app.child as $action}
+			<dl>
+				<dt>
+					<span>{$action.title}
+					</span>[<a style="color:blue" target="dialog" href="__URL__/addNode2/pid/{$action['id']}/level/3}">添加方法</a>]
+				</dt>
+				{foreach $action.child as $method}
+					<dd>
+						<span>{$method.title}</span>
+					</dd>				
+				{/foreach}
+			</dl>
+			{/foreach}	
+		</div>	
+		{/foreach}
+	</div>
+
+</div>

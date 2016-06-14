@@ -1,0 +1,43 @@
+<div class="pageContent">
+	<form method="post" action="__URL__/editStatusHandle/navTabId/listmovie/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		
+		<input type='hidden' name='pstatus' value="{$vo.status}" />
+		
+		<input type="hidden" name="id" value="{$vo.id}" />
+
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>影 片 名：</label>
+				
+				<input  class="textInput readonly disabled" size="30" type="text" value="{$vo.filmname}" />
+			</p>
+			
+			<p>
+				<label>影片别名：</label>
+				<input class="textInput readonly disabled" type="text" size="30" value="{$vo.petname}" />
+			</p>
+			
+			<p>
+				<label>上映时间：</label>
+				<input type="text" class="textInput readonly disabled" size="30" value="{$vo.addtime|date_format:'%Y-%m-%d'}" />
+			</p>
+
+			<p>
+				<label>状 态：</label>
+				<input name="status" type="radio" size="30" value='0' {if $vo['status'] == 0}checked{/if} />新添加
+				<input name="status" type="radio" size="30" value='1' {if $vo['status'] == 1}checked{/if} />显示
+				<input name="status" type="radio" size="30" value='2' {if $vo['status'] == 2}checked{/if}/>幻灯片		
+			</p>
+				
+		</div>
+		<div class="formBar">
+			<ul>
+				<!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
