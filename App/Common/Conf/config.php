@@ -6,12 +6,14 @@ return array(
 		'DEFAULT_CONTROLLER'    =>  'Index',
 		// 默认操作名称
 		'DEFAULT_ACTION'        =>  'index',
+		// Public目录
+		'PUBLIC_URL'            =>  './Public',
 		
 		
 		/* 数据库设置 */
 		'DB_TYPE'     => 'mysql',     // 数据库类型
 		'DB_HOST'     => '192.168.2.200', // 服务器地址
-		'DB_NAME'     => 'hb00001',   // 数据库名
+		'DB_NAME'     => 'test',   // 数据库名
 		'DB_USER'     => 'huangbo',      // 用户名
 		'DB_PWD'      => 'bo456123',          // 密码
 		'DB_PORT'     => '3306',          // 端口

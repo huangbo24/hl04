@@ -1,4 +1,4 @@
-<script type="text/javascript">
+﻿<script type="text/javascript">
 		//左侧公共个人中心特效
 		$(function(){
 			$(window).scroll(function(){
@@ -24,15 +24,16 @@
 		});
 
 	</script>
-	<script type="text/javascript" src="{$smarty.const.PUBILIC_URL}js/home/totop.js"></script>
-	<script type="text/javascript" src="{$smarty.const.PUBILIC_URL}js/home/thickbox_plus.js"></script>
-	<link rel="stylesheet" type="text/css" href="{$smarty.const.PUBILIC_URL}css/home/thickbox.css"/>
+	<script type="text/javascript" src="__PUBLIC__/front/js/totop.js"></script>
+	<!-- <script type="text/javascript" src="__PUBLIC__/front/js/jquery.js"></script> -->
+	<script type="text/javascript" src="__PUBLIC__/front/js/thickbox_plus.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/front/css/thickbox.css"/>
 	<!-- head页头部分开始 -->
 		<div id="header">
 			<div class="h_top">
 				<div class="con">
 					<ul class="left">
-						<li><a href="__APP__/Index/index" class="title">hlyy 因你而改变</a></li>
+						<li><a href="__APP__/Index/index" class="title">My movie 因你而精彩</a></li>
 						<!-- <li><a href="">群组</a></li> -->
 					</ul>
 					<ul class="right">
@@ -52,18 +53,18 @@
 			<div class="h_center">
 				<div class="con">
 					<div class="logo">
-						<a href="__APP__/Index/index"><span>hlyy</span></a>
+						<a href="__APP__/Index/index"><span>My movie</span></a>
 						<!-- <img src="__PUBLIC__/front/images/logo.jpg" alt="" /> -->
 					</div>
 					<!-- 搜索 -->
 					<div class="search">
-						<form action="{$smarty.const.__MODULE__}/search/search" method="post">
+						<form action="__APP__/Index/search" method="post">
 							<input type="text" class="inp" placeholder="电影、分类" style="font-size:12px; padding-left:5px;" name="key" />
-							<input type="submit" class="sub" value="搜索"/>
+							<input type="submit" class="sub" value=""/>
 						</form>
 					</div>
 					<div class="logoimg">
-						<img src="{$smarty.const.PUBILIC_URL}image/logo.jpg" alt="" />
+						<img src="__PUBLIC__/front/images/logo.jpg" alt="" />
 					</div>
 				</div> 
 			</div>
@@ -71,11 +72,12 @@
 			<div class="h_down">
 				<div class="menu">
 					<ul>
-						<li><a href="{$smarty.const.__APP__}">首页</a></li>
-						<li><a href="{$smarty.const.__APP__}home/News/news">影讯</a></li>
+						<li><a href="__APP__/Index/index">首页</a></li>
+						<li><a href="__APP__/News/news">影讯</a></li>
 						<li><a href="__APP__/List/movielist">排行榜</a></li>
 						<li><a href="__APP__/List/index">影评</a></li>
 						<li><a href="__APP__/Typelist/index">分类</a></li>
+						<li><a href="__APP__/Prevue/index">预告片</a></li>
 					</ul>
 				</div>
 			</div>
@@ -99,7 +101,8 @@
 					});
 				}
 			});
-
+		
+	
 		});
 		//点击个人中心进行判断
 		function persionCheckLogin(){
@@ -109,17 +112,20 @@
 			}else{
 				alert_display_block("你还没有登录！");
 			}
-		}		
+		}
+		
 		</script>
 		
 		<div id="person_menu">
 			<ul>
 				<li class="nav0 current_page"><a href="javascript:persionCheckLogin();">个人中心</a></li>
-				<li class="nav1"><a title="首页" href="{$smarty.const.__APP__}">首页</a></li>
+				<li class="nav1"><a title="首页" href="__APP__/Index/index">首页</a></li>
 				<li class="nav2"><a title="影讯" href="__APP__/News/news">影讯</a></li>
 				<li class="nav3"><a title="排行榜" href="__APP__/List/movielist">排行榜</a></li>
 				<li class="nav4"><a title="影评" href="__APP__/List/index">影评</a></li>
 				<li class="nav5"><a title="分类" href="__APP__/Typelist/index">分类</a></li>
+				<li class="nav6"><a title="预告片" href="__APP__/Prevue/index">预告片</a></li>
+				<li class="nav7"><a title="网站地图" href="__APP__/Map/map">网站地图</a></li>
 			</ul>
 		</div>
 	
