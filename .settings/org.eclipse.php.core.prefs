@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 include_path=0;/hl104
+=======
+include_path=0;/hl03
+>>>>>>> 96ee10e5cd4999bda7757dd5a4c29fbd33cf0ddd
 use_asp_tags_as_php=false
