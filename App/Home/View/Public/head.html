@@ -24,16 +24,16 @@
 		});
 
 	</script>
-	<script type="text/javascript" src="__PUBLIC__/front/js/totop.js"></script>
-	<!-- <script type="text/javascript" src="__PUBLIC__/front/js/jquery.js"></script> -->
-	<script type="text/javascript" src="__PUBLIC__/front/js/thickbox_plus.js"></script>
-	<link rel="stylesheet" type="text/css" href="__PUBLIC__/front/css/thickbox.css"/>
+	<script type="text/javascript" src="{$smarty.const.PUBLIC_URL}front/js/totop.js"></script>
+	<!-- <script type="text/javascript" src="{$smarty.const.PUBLIC_URL}front/js/jquery.js"></script> -->
+	<script type="text/javascript" src="{$smarty.const.PUBLIC_URL}front/js/thickbox_plus.js"></script>
+	<link rel="stylesheet" type="text/css" href="{$smarty.const.PUBLIC_URL}front/css/thickbox.css"/>
 	<!-- head页头部分开始 -->
 		<div id="header">
 			<div class="h_top">
 				<div class="con">
 					<ul class="left">
-						<li><a href="__APP__/Index/index" class="title">My movie 因你而精彩</a></li>
+						<li><a href="__APP__/Index/index" class="title">hlmovie 因你而精彩</a></li>
 						<!-- <li><a href="">群组</a></li> -->
 					</ul>
 					<ul class="right">
@@ -53,18 +53,18 @@
 			<div class="h_center">
 				<div class="con">
 					<div class="logo">
-						<a href="__APP__/Index/index"><span>My movie</span></a>
-						<!-- <img src="__PUBLIC__/front/images/logo.jpg" alt="" /> -->
+						<a href="__APP__/Index/index"><span>hlmovie</span></a>
+						<!-- <img src="{$smarty.const.PUBLIC_URL}front/images/logo.jpg" alt="" /> -->
 					</div>
 					<!-- 搜索 -->
 					<div class="search">
-						<form action="__APP__/Index/search" method="post">
+						<form action="{$smarty.const.__MODULE__}/Search/Search" method="post">
 							<input type="text" class="inp" placeholder="电影、分类" style="font-size:12px; padding-left:5px;" name="key" />
 							<input type="submit" class="sub" value=""/>
 						</form>
 					</div>
 					<div class="logoimg">
-						<img src="__PUBLIC__/front/images/logo.jpg" alt="" />
+						<img src="{$smarty.const.PUBLIC_URL}front/images/logo.jpg" alt="" />
 					</div>
 				</div> 
 			</div>

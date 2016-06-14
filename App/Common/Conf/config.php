@@ -6,8 +6,6 @@ return array(
 		'DEFAULT_CONTROLLER'    =>  'Index',
 		// 默认操作名称
 		'DEFAULT_ACTION'        =>  'index',
-		// Public目录
-		'PUBLIC_URL'            =>  './Public',
 		
 		
 		/* 数据库设置 */
